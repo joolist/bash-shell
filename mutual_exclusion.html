@@ -1656,7 +1656,6 @@ $ cat commands.txt | <span class="hljs-keyword">while</span> <span class="hljs-b
 
 <span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">consumer</span> <span class="hljs-params">(<span class="hljs-keyword">void</span> *arg)</span> 
 </span>{
-    pthread_mutex_lock (&amp;lock);
     pthread_cond_wait (&amp;fill, &amp;lock);        <span class="hljs-comment">// &#xC2DC;&#xC791;&#xC2DC; consumer &#xB294; &#xBA3C;&#xC800; wait &#xD55C;&#xB2E4;.</span>
     pthread_mutex_unlock (&amp;lock);
     <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
@@ -1689,7 +1688,9 @@ wait &#xD558;&#xAE30; &#xC804;&#xC5D0; &#xBCF4;&#xB0B4;&#xC9C4; signal &#xC740; 
 &#xB3D9;&#xC2DC;&#xC5D0; wait &#xD558;&#xAC8C; &#xB418;&#xB294; deadlock &#xC0C1;&#xD0DC;&#xAC00; &#xB420; &#xC218; &#xC788;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
 <p>&#xCC38;&#xACE0;&#xB85C; wait &#xC0C1;&#xD0DC;&#xAC00; &#xB420; &#xB54C;&#xB294; &#xC7A1;&#xACE0; &#xC788;&#xB358; lock &#xC774; &#xC790;&#xB3D9;&#xC73C;&#xB85C; unlock &#xC774; &#xB418;&#xC5B4; &#xB2E4;&#xB978; &#xD504;&#xB85C;&#xC138;&#xC2A4;&#xAC00;
 &#xC784;&#xACC4; &#xC601;&#xC5ED;&#xC5D0; &#xC9C4;&#xC785;&#xD560; &#xC218; &#xC788;&#xAC8C; &#xB418;&#xACE0; &#xB098;&#xC911;&#xC5D0; signal &#xC744; &#xBC1B;&#xACE0; &#xAE68;&#xC5B4;&#xB098;&#xAC8C; &#xB420; &#xB54C;&#xB294; &#xC790;&#xB3D9;&#xC73C;&#xB85C; 
-lock &#xC744; &#xB2E4;&#xC2DC; &#xC7A1;&#xACE0; &#xC9C4;&#xD589;&#xD558;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.</p>
+lock &#xC744; &#xB2E4;&#xC2DC; &#xC7A1;&#xACE0; &#xC9C4;&#xD589;&#xD558;&#xAC8C; &#xB429;&#xB2C8;&#xB2E4;.
+&#xB530;&#xB77C;&#xC11C; consumer &#xD568;&#xC218;&#xC758; &#xCCAB; &#xBC88;&#xC9F8; <code>pthread_cond_wait()</code> &#xB4A4;&#xC5D0;&#xB294; <code>pthread_mutex_unlock()</code>
+&#xC774; &#xC640;&#xC57C; &#xD569;&#xB2C8;&#xB2E4;.</p>
 </blockquote>
 <pre><code class="lang-bash">$ gcc -pthread test.c
 
@@ -1757,7 +1758,6 @@ producer &#xB294; &#xB300;&#xAE30;&#xD558;&#xC9C0; &#xC54A;&#xACE0; buffer 1 &#x
 
 <span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">consumer</span> <span class="hljs-params">(<span class="hljs-keyword">void</span> *arg)</span> 
 </span>{
-    pthread_mutex_lock (&amp;lock);
     pthread_cond_wait (&amp;fill, &amp;lock);
     pthread_mutex_unlock (&amp;lock);
     <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
