@@ -1665,10 +1665,11 @@ C &#xD504;&#xB85C;&#xADF8;&#xB798;&#xBC0D;&#xC5D0;&#xC11C;&#xB294; &#xAC00;&#xB2
     }
 
     <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;I&apos;m parent pid %d\n&quot;</span>, getpid());
-    <span class="hljs-keyword">struct</span> sigaction act;
-    act.sa_sigaction = handler;         <span class="hljs-comment">// signal handler &#xC5D0;&#xC11C; siginfo_t &#xAC12;&#xC744;</span>
-    act.sa_flags = SA_SIGINFO;          <span class="hljs-comment">// &#xC0AC;&#xC6A9;&#xD558;&#xAE30; &#xC704;&#xD574; SA_SIGINFO &#xB97C; &#xC124;&#xC815;</span>
-    sigaction (SIGTERM, &amp;act, <span class="hljs-literal">NULL</span>);    
+    <span class="hljs-keyword">struct</span> sigaction sa = {
+        .sa_sigaction = handler,         <span class="hljs-comment">// signal handler &#xC5D0;&#xC11C; siginfo_t &#xAC12;&#xC744;</span>
+        .sa_flags = SA_SIGINFO,          <span class="hljs-comment">// &#xC0AC;&#xC6A9;&#xD558;&#xAE30; &#xC704;&#xD574; SA_SIGINFO &#xB97C; &#xC124;&#xC815;</span>
+    };
+    sigaction (SIGTERM, &amp;sa, <span class="hljs-literal">NULL</span>);
 
     pause(); wait (<span class="hljs-literal">NULL</span>);
     <span class="hljs-built_in">puts</span> (<span class="hljs-string">&quot;main end...&quot;</span>);
