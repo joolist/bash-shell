@@ -2017,10 +2017,9 @@ lrwx------ <span class="hljs-number">1</span> mug896 mug896 <span class="hljs-nu
     <span class="hljs-keyword">int</span> clientfd  = (<span class="hljs-keyword">int</span>)(<span class="hljs-keyword">size_t</span>) arg;
     clist [clientfd] = <span class="hljs-number">1</span>;
     <span class="hljs-keyword">char</span> buf [<span class="hljs-number">1024</span>];
-
-    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
-        <span class="hljs-built_in">memset</span> (buf, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> (buf));
-        <span class="hljs-keyword">int</span> rc1 = <span class="hljs-built_in">sprintf</span> (buf, <span class="hljs-string">&quot;[ sockfd %d ] &quot;</span>, clientfd);
+    <span class="hljs-keyword">int</span> rc1 = <span class="hljs-built_in">sprintf</span> (buf, <span class="hljs-string">&quot;[ sockfd %d ] &quot;</span>, clientfd);
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
+    {
         <span class="hljs-keyword">int</span> rc2 = read (clientfd, buf + rc1, <span class="hljs-keyword">sizeof</span> (buf) - <span class="hljs-number">1</span> - rc1);
         <span class="hljs-keyword">if</span> (rc2 == <span class="hljs-number">0</span>) <span class="hljs-keyword">break</span>;
         rc2 = rc1 + rc2;
