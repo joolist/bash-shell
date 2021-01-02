@@ -2083,8 +2083,8 @@ lrwx------ <span class="hljs-number">1</span> mug896 mug896 <span class="hljs-nu
 
     <span class="hljs-keyword">struct</span> epoll_event events[<span class="hljs-number">1</span>];
     <span class="hljs-keyword">char</span> buf [<span class="hljs-number">1024</span>];
-
-    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
+    {
         epoll_wait (epollfd, events, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>);
 
         <span class="hljs-keyword">if</span> (events[<span class="hljs-number">0</span>].data.fd == STDIN_FILENO) {
