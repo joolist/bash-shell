@@ -1658,10 +1658,9 @@ C &#xD504;&#xB85C;&#xADF8;&#xB798;&#xBC0D;&#xC5D0;&#xC11C;&#xB294; &#xAC00;&#xB2
         <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;I&apos;m child pid %d\n&quot;</span> ,getpid());
         <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;      \\----&gt; Sending TERM signal to parent pid %d\n&quot;</span>, getppid());
         sleep(<span class="hljs-number">1</span>);
-        <span class="hljs-keyword">union</span> sigval val; 
-        val.sival_int = <span class="hljs-number">12345</span>;                 <span class="hljs-comment">// kill &#xD568;&#xC218; &#xB300;&#xC2E0;&#xC5D0; sigqueue &#xD568;&#xC218;&#xB97C; </span>
-        sigqueue (getppid(), SIGTERM, val);    <span class="hljs-comment">// &#xC774;&#xC6A9;&#xD574; integer or pointer &#xAC12;&#xC744; &#xC804;&#xB2EC;</span>
-        _exit (EXIT_SUCCESS);
+        <span class="hljs-keyword">union</span> sigval val = { .sival_int = <span class="hljs-number">12345</span> };
+        sigqueue (getppid(), SIGTERM, val);    <span class="hljs-comment">// kill &#xD568;&#xC218; &#xB300;&#xC2E0;&#xC5D0; sigqueue &#xD568;&#xC218;&#xB97C; </span>
+        _exit (EXIT_SUCCESS);                  <span class="hljs-comment">// &#xC774;&#xC6A9;&#xD574; integer or pointer &#xAC12;&#xC744; &#xC804;&#xB2EC;</span>
     }
 
     <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;I&apos;m parent pid %d\n&quot;</span>, getpid());
