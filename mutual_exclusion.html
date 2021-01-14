@@ -1643,7 +1643,7 @@ $ cat commands.txt | <span class="hljs-keyword">while</span> <span class="hljs-b
     <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
     {
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX; i++) {      <span class="hljs-comment">// producer &#xB294; &#xBC84;&#xD37C;&#xC5D0; &#xB370;&#xC774;&#xD130;&#xB97C; &#xCC44;&#xC6B4;&#xB2E4;.</span>
-            sleep (<span class="hljs-number">1</span>);
+            usleep (<span class="hljs-number">500000</span>);
             buffer [i] = item++;
             <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;PRODUCE      %c\n&quot;</span>, buffer [i]);
         }
@@ -1661,7 +1661,7 @@ $ cat commands.txt | <span class="hljs-keyword">while</span> <span class="hljs-b
     <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
     {                                        <span class="hljs-comment">// wait &#xD558;&#xACE0; &#xC788;&#xB2E4;&#xAC00; producer &#xAC00; &#xAE68;&#xC6B0;&#xBA74;</span>
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; MAX; i++) {      <span class="hljs-comment">// &#xC77C;&#xC5B4;&#xB098; &#xBC84;&#xD37C; &#xB0B4;&#xC6A9;&#xC744; &#xC77D;&#xC5B4; &#xB4E4;&#xC778;&#xB2E4;.</span>
-            sleep (<span class="hljs-number">1</span>);
+            usleep (<span class="hljs-number">500000</span>);
             <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;CONSUME         %c\n&quot;</span>, buffer [i]);
         }
         pthread_mutex_lock (&amp;lock);
@@ -1743,7 +1743,7 @@ producer &#xB294; &#xB300;&#xAE30;&#xD558;&#xC9C0; &#xC54A;&#xACE0; buffer 1 &#x
     <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
     {
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; BMAX; i++) {
-            sleep (<span class="hljs-number">1</span>);
+            usleep (<span class="hljs-number">500000</span>);
             buffer [head][i] = item++;
             <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;PRODUCE buffer %d    %c\n&quot;</span>, head, buffer [head][i]);
         }
@@ -1763,7 +1763,7 @@ producer &#xB294; &#xB300;&#xAE30;&#xD558;&#xC9C0; &#xC54A;&#xACE0; buffer 1 &#x
     <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) 
     {
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; BMAX; i++) {
-            sleep (<span class="hljs-number">1</span>);
+            usleep (<span class="hljs-number">500000</span>);
             <span class="hljs-built_in">printf</span> (<span class="hljs-string">&quot;CONSUME buffer %d       %c\n&quot;</span>, tail, buffer [tail][i]);
         }
         pthread_mutex_lock (&amp;lock);
