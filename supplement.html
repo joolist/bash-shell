@@ -1693,7 +1693,8 @@ FD 3 &#xBC88;&#xC744; FD 0 &#xBC88;&#xC73C;&#xB85C; copy &#xD569;&#xB2C8;&#xB2E4
     <span class="hljs-keyword">char</span> *line = <span class="hljs-literal">NULL</span>; <span class="hljs-keyword">size_t</span> len = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">if</span> (childpid == <span class="hljs-number">0</span>)    <span class="hljs-comment">// child &#xD504;&#xB85C;&#xC138;&#xC2A4; </span>
     {
-        dup2 (fd[<span class="hljs-number">1</span>], STDOUT_FILENO); close (fd[<span class="hljs-number">0</span>]); close (fd[<span class="hljs-number">1</span>]);
+        dup2 (fd[<span class="hljs-number">1</span>], STDOUT_FILENO);
+        close (fd[<span class="hljs-number">0</span>]); close (fd[<span class="hljs-number">1</span>]);
         FILE *fp = fopen (<span class="hljs-string">&quot;/proc/self/maps&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>);
         <span class="hljs-keyword">while</span> (getline (&amp;line, &amp;len, fp) != -<span class="hljs-number">1</span>) 
             <span class="hljs-built_in">fputs</span> (line, <span class="hljs-built_in">stdout</span>);     <span class="hljs-comment">// &#xC774;&#xC81C; stdout &#xC73C;&#xB85C; &#xCD9C;&#xB825;&#xD558;&#xBA74; &#xD30C;&#xC774;&#xD504;&#xB85C; &#xC4F0;&#xAE30;&#xAC00; &#xB41C;&#xB2E4;.</span>
@@ -1701,7 +1702,8 @@ FD 3 &#xBC88;&#xC744; FD 0 &#xBC88;&#xC73C;&#xB85C; copy &#xD569;&#xB2C8;&#xB2E4
     }
     <span class="hljs-keyword">else</span>    <span class="hljs-comment">// parent &#xD504;&#xB85C;&#xC138;&#xC2A4;</span>
     {
-        dup2 (fd[<span class="hljs-number">0</span>], STDIN_FILENO); close (fd[<span class="hljs-number">0</span>]); close (fd[<span class="hljs-number">1</span>]);
+        dup2 (fd[<span class="hljs-number">0</span>], STDIN_FILENO);
+        close (fd[<span class="hljs-number">0</span>]); close (fd[<span class="hljs-number">1</span>]);
         <span class="hljs-keyword">while</span> ( getline (&amp;line, &amp;len, <span class="hljs-built_in">stdin</span>) != -<span class="hljs-number">1</span>)    <span class="hljs-comment">// stdin &#xC744; &#xC77D;&#xC73C;&#xBA74; &#xD30C;&#xC774;&#xD504;&#xB85C; &#xBD80;&#xD130;</span>
         {                                              <span class="hljs-comment">// &#xC77D;&#xAE30;&#xAC00; &#xB41C;&#xB2E4;.</span>
             <span class="hljs-keyword">if</span> (argc &gt; <span class="hljs-number">1</span>) {
